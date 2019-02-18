@@ -1,0 +1,71 @@
+{
+	"name": "sophia",
+	"description": "Aeternity Sophia Language for Visual Studio Code",
+	"keywords": [
+		"sophia",
+		"aeternity",
+		"blockchain",
+		"compiler",
+		"solhint"
+	],
+	"version": "0.0.1",
+	"publisher": "MilenRadkov",
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"contributors": [
+		"Milen Radkov"
+	],
+	"bugs": {
+		"url": "https://github.com/mradkov/vscode-sophia/issues"
+	},
+	"icon": "images/icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mradkov/vscode-sophia"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"dependencies": {
+		"ajv": "^6.5.2",
+		"ajv-keywords": "^3.2.0",
+		"fs-extra": "^4.0.3",
+		"read-yaml": "^1.1.0",
+		"vscode-languageclient": "^5.1.1",
+		"vscode-languageserver": "^5.1.0",
+		"solidity-parser-antlr": "^0.3.2",
+		"antlr4-c3": "^1.1.8",
+		"vscode-uri": "^1.0.3",
+		"armlet": "^0.2.2"
+	},
+	"devDependencies": {
+		"@types/node": "^10.5.5",
+		"tslint": "^5.11.0",
+		"typescript": "^3.1.3",
+		"vscode": "^1.1.22"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "sophia",
+				"aliases": [
+					"Sophia",
+					"sophia"
+				],
+				"extensions": [
+					".aes"
+				],
+				"configuration": "./sophia.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "sophia",
+				"scopeName": "source.sophia",
+				"path": "./syntaxes/sophia.json"
+			}
+		]
+	}
+}
