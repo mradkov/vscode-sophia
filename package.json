@@ -5,7 +5,8 @@
 		"sophia",
 		"aeternity",
 		"blockchain",
-		"compiler"
+		"compiler",
+		"sophiahint"
 	],
 	"version": "0.1.0",
 	"publisher": "MilenRadkov",
