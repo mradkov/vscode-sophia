@@ -295,7 +295,7 @@
             ]
         },
         "type-primitive": {
-            "match": "\\b(address|string\\d*|bytes\\d*|int\\d*|uint\\d*|bool|hash\\d*)\\b",
+            "match": "\\b(address|string\\d*|bits\\d*|int\\d*|bool|list\\d*|tuple\\d*|record\\d*|map\\d*|option\\d*|state\\d*|transactions\\d*|events\\d*|signature\\d*)\\b",
             "name": "support.type.primitive.sophia"
         },
         "global": {
@@ -311,28 +311,20 @@
         "global-variables": {
             "patterns": [
                 {
-                    "match": "\\b(msg|block|tx|now)\\b",
+                    "match": "\\b(Chain|Bits|Map|String|Int|Crypto|Oracle|AENS|Contract|Call)\\b",
                     "name": "variable.language.transaction.sophia"
-                },
-                {
-                    "match": "\\b(this)\\b",
-                    "name": "variable.language.this.sophia"
-                },
-                {
-                    "match": "\\b(super)\\b",
-                    "name": "variable.language.super.sophia"
                 }
             ]
         },
         "global-functions": {
             "patterns": [
                 {
-                    "match": "\\b(require|assert|revert)\\b",
+                    "match": "\\b(require|assert|revert|abort)\\b",
                     "name": "keyword.control.exceptions.sophia"
                 },
                 {
-                    "match": "\\b(selfdestruct|suicide)\\b",
-                    "name": "keyword.control.contract.sophia"
+                    "match": "\\b(and|contract|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|stateful|switch|true|type|record|datatype)\\b",
+                    "name": "keyword.control.keywords.sophia"
                 },
                 {
                     "match": "\\b(addmod|mulmod|keccak256|sha256|sha3|ripemd160|ecrecover)\\b",
@@ -356,7 +348,10 @@
                     "include": "#declaration-library"
                 },
                 {
-                    "include": "#declaration-struct"
+                    "include": "#declaration-namespace"
+                },
+                {
+                    "include": "#declaration-record"
                 },
                 {
                     "include": "#declaration-event"
@@ -366,9 +361,6 @@
                 },
                 {
                     "include": "#declaration-function"
-                },
-                {
-                    "include": "#declaration-constructor"
                 },
                 {
                     "include": "#declaration-modifier"
@@ -419,14 +411,25 @@
                 }
             }
         },
-        "declaration-struct": {
-            "match": "\\b(struct)(\\s+([A-Za-z_]\\w*))?\\b",
+        "declaration-namespace": {
+            "match": "\\b(namespace)(\\s+([A-Za-z_]\\w*))?\\b",
             "captures": {
                 "1": {
-                    "name": "storage.type.struct.sophia"
+                    "name": "storage.type.namespace.sophia"
                 },
                 "3": {
-                    "name": "entity.name.type.struct.sophia"
+                    "name": "entity.name.type.namespace.sophia"
+                }
+            }
+        },
+        "declaration-struct": {
+            "match": "\\b(record)(\\s+([A-Za-z_]\\w*))?\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.record.sophia"
+                },
+                "3": {
+                    "name": "entity.name.type.record.sophia"
                 }
             }
         },
@@ -438,14 +441,6 @@
                 },
                 "3": {
                     "name": "entity.name.type.event.sophia"
-                }
-            }
-        },
-        "declaration-constructor": {
-            "match": "\\b(constructor)\\b",
-            "captures": {
-                "1": {
-                    "name": "storage.type.constructor.sophia"
                 }
             }
         },
@@ -474,7 +469,7 @@
                     }
                 },
                 {
-                    "match": "\\b(private|public|internal|external|constant|pure|view|payable|nonpayable|inherited|indexed|storage|memory)\\b",
+                    "match": "\\b(private|public|internal|external|constant|stateful)\\b",
                     "name": "storage.type.mofifier.sophia"
                 }
             ]
@@ -501,18 +496,6 @@
                     "name": "entity.name.function.sophia"
                 }
             }
-        },
-        "assembly": {
-            "patterns": [
-                {
-                    "match": "\\b(assembly)\\b",
-                    "name": "keyword.control.assembly.sophia"
-                },
-                {
-                    "match": "\\b(let)\\b",
-                    "name": "storage.type.assembly.sophia"
-                }
-            ]
         },
         "punctuation": {
             "patterns": [
