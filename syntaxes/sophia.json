@@ -38,9 +38,6 @@
             "include": "#function-call"
         },
         {
-            "include": "#assembly"
-        },
-        {
             "include": "#punctuation"
         }
     ],
@@ -147,7 +144,7 @@
                     "include": "#operator-logic"
                 },
                 {
-                    "include": "#operator-mapping"
+                    "include": "#operator-arrow-associative"
                 },
                 {
                     "include": "#operator-arithmetic"
@@ -161,12 +158,12 @@
             ]
         },
         "operator-logic": {
-            "match": "(==|<(?!<)|<=|>(?!>)|>=|\\&\\&|\\|\\||\\:(?!=)|\\?)",
+            "match": "((==|=<|>=|<|>|\\!=))",
             "name": "keyword.operator.logic.sophia"
         },
-        "operator-mapping": {
+        "operator-arrow-associative": {
             "match": "(=>)",
-            "name": "keyword.operator.mapping.sophia"
+            "name": "keyword.operator.arrow.associative.sophia"
         },
         "operator-arithmetic": {
             "match": "(\\+|\\-|\\/|\\*)",
@@ -186,13 +183,7 @@
                     "include": "#control-flow"
                 },
                 {
-                    "include": "#control-using"
-                },
-                {
                     "include": "#control-import"
-                },
-                {
-                    "include": "#control-pragma"
                 },
                 {
                     "include": "#control-underscore"
@@ -206,27 +197,9 @@
             "match": "\\b(if|else|for|while|do|break|continue|throw|returns?)\\b",
             "name": "keyword.control.flow.sophia"
         },
-        "control-using": {
-            "match": "\\b(using)\\b",
-            "name": "keyword.control.using.sophia"
-        },
         "control-import": {
             "match": "\\b(import)\\b",
             "name": "keyword.control.import.sophia"
-        },
-        "control-pragma": {
-            "match": "\\b(pragma)(?:\\s+([A-Za-z_]\\w+)\\s+([^\\s]+))?\\b",
-            "captures": {
-                "1": {
-                    "name": "keyword.control.pragma.sophia"
-                },
-                "2": {
-                    "name": "entity.name.tag.pragma.sophia"
-                },
-                "3": {
-                    "name": "constant.other.pragma.sophia"
-                }
-            }
         },
         "control-underscore": {
             "match": "\\b(_)\\b",
@@ -363,9 +336,6 @@
                     "include": "#declaration-function"
                 },
                 {
-                    "include": "#declaration-modifier"
-                },
-                {
                     "include": "#declaration-mapping"
                 }
             ]
@@ -422,7 +392,7 @@
                 }
             }
         },
-        "declaration-struct": {
+        "declaration-record": {
             "match": "\\b(record)(\\s+([A-Za-z_]\\w*))?\\b",
             "captures": {
                 "1": {
@@ -458,7 +428,7 @@
         "declaration-function": {
             "patterns": [
                 {
-                    "match": "\\b(function)\\s+([A-Za-z_]\\w*)\\b",
+                    "match": "\\b(function)\\s+([A-Za-z_']*)\\b",
                     "captures": {
                         "1": {
                             "name": "storage.type.function.sophia"
@@ -474,23 +444,12 @@
                 }
             ]
         },
-        "declaration-modifier": {
-            "match": "\\b(modifier)(\\s+([A-Za-z_]\\w*))?\\b",
-            "captures": {
-                "1": {
-                    "name": "storage.type.modifier.sophia"
-                },
-                "3": {
-                    "name": "entity.name.function.sophia"
-                }
-            }
-        },
         "declaration-mapping": {
             "match": "\\b(mapping)\\b",
             "name": "storage.type.mapping.sophia"
         },
         "function-call": {
-            "match": "\\b([A-Za-z_]\\w*)\\s*\\(",
+            "match": "\\b([A-Za-z_']*)\\s*\\(",
             "captures": {
                 "1": {
                     "name": "entity.name.function.sophia"
