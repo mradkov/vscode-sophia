@@ -284,10 +284,6 @@
                 {
                     "match": "\\\".*?\\\"",
                     "name": "string.quoted.double.sophia"
-                },
-                {
-                    "match": "\\'.*?\\'",
-                    "name": "string.quoted.single.sophia"
                 }
             ]
         },
