@@ -11,7 +11,7 @@
 	"version": "1.0.2",
 	"publisher": "MilenRadkov",
 	"engines": {
-		"vscode": "^1.28.0"
+		"vscode": "^1.25.0"
 	},
 	"contributors": [
 		"Milen Radkov"
