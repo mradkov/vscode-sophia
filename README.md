@@ -9,6 +9,9 @@ This extension provides:
 - [ ] Code completion
 - [ ] Default project structure
 
+# Roadmap
+
+The development [roadmap](https://github.com/mradkov/vscode-sophia/wiki/Roadmap) is being prepared here.
 
 # Contributing / Issues / Requests
 
