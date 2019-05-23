@@ -268,7 +268,7 @@
             ]
         },
         "type-primitive": {
-            "match": "\\b(address|string\\d*|bits\\d*|int\\d*|bool|list\\d*|tuple\\d*|record\\d*|map\\d*|option\\d*|state\\d*|transactions\\d*|events\\d*|signature\\d*)\\b",
+            "match": "\\b(address|string\\d*|bits\\d*|hash\\d*|int\\d*|bool|list\\d*|tuple\\d*|record\\d*|map\\d*|option\\d*|state\\d*|transactions\\d*|events\\d*|signature\\d*)\\b",
             "name": "support.type.primitive.sophia"
         },
         "global": {
