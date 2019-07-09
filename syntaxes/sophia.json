@@ -296,7 +296,7 @@
                     "name": "keyword.control.exceptions.sophia"
                 },
                 {
-                    "match": "\\b(and|contract|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|stateful|switch|true|type|record|datatype)\\b",
+                    "match": "\\b(and|contract|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|stateful|entrypoint|switch|true|type|record|datatype)\\b",
                     "name": "keyword.control.keywords.sophia"
                 },
                 {
