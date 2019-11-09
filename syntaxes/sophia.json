@@ -205,15 +205,12 @@
             "name": "keyword.control.import.sophia"
         },
         "control-pragma": {
-            "match": "\\b(\\@compiler)(?:\\s+([A-Za-z_]\\w+)\\s+([^\\s]+))?\\b",
+            "match": "\\b(\\@compiler)(?:\\s+([^\\s]+))?\\b",
             "captures": {
                 "1": {
                     "name": "keyword.control.pragma.sophia"
                 },
                 "2": {
-                    "name": "entity.name.tag.pragma.sophia"
-                },
-                "3": {
                     "name": "constant.other.pragma.sophia"
                 }
             }
