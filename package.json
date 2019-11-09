@@ -8,7 +8,7 @@
 		"compiler",
 		"sophiahint"
 	],
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"publisher": "MilenRadkov",
 	"engines": {
 		"vscode": "^1.25.0"
