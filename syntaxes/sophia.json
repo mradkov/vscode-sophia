@@ -186,6 +186,9 @@
                     "include": "#control-import"
                 },
                 {
+                    "include": "#control-pragma"
+                },
+                {
                     "include": "#control-underscore"
                 },
                 {
@@ -200,6 +203,20 @@
         "control-import": {
             "match": "\\b(import)\\b",
             "name": "keyword.control.import.sophia"
+        },
+        "control-pragma": {
+            "match": "\\b(\\@compiler)(?:\\s+([A-Za-z_]\\w+)\\s+([^\\s]+))?\\b",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.pragma.sophia"
+                },
+                "2": {
+                    "name": "entity.name.tag.pragma.sophia"
+                },
+                "3": {
+                    "name": "constant.other.pragma.sophia"
+                }
+            }
         },
         "control-underscore": {
             "match": "\\b(_)\\b",
@@ -268,7 +285,7 @@
             ]
         },
         "type-primitive": {
-            "match": "\\b(address|string\\d*|bits\\d*|hash\\d*|int\\d*|bool|list\\d*|tuple\\d*|record\\d*|map\\d*|option\\d*|state\\d*|transactions\\d*|events\\d*|signature\\d*|None\\d*|Some\\d*)\\b",
+            "match": "\\b(address|string\\d*|bits\\d*|hash\\d*|int\\d*|bool\\d*|unit\\d*|list\\d*|tuple\\d*|record\\d*|map\\d*|option\\d*|state\\d*|transactions\\d*|events\\d*|signature\\d*|None\\d*|Some\\d*)\\b",
             "name": "support.type.primitive.sophia"
         },
         "global": {
