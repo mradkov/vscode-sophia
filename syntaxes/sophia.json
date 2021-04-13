@@ -298,7 +298,7 @@
         "global-variables": {
             "patterns": [
                 {
-                    "match": "\\b(Chain|Address|Bits|Map|String|Int|Crypto|Oracle|AENS|Contract|Call|Option|Func|BLS12_381|Frac|Bytes|Char|Auth|List|Pair|Triple)\\b",
+                    "match": "\\b(Chain|Address|Bits|Map|String|Int|Crypto|Oracle|AENS|Contract|Call|Option|Func|BLS12_381|Frac|Bytes|Char|Auth|List|Pair|Triple|Some|None)\\b",
                     "name": "variable.language.transaction.sophia"
                 }
             ]
