@@ -313,7 +313,7 @@
                     "name": "keyword.control.exceptions.sophia"
                 },
                 {
-                    "match": "\\b(and|contract|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|payable|stateful|entrypoint|switch|true|type|record|datatype|main)\\b",
+                    "match": "\\b(and|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|payable|stateful|entrypoint|switch|true|type|record|datatype|main)\\b",
                     "name": "keyword.control.keywords.sophia"
                 },
                 {
@@ -330,9 +330,6 @@
             "patterns": [
                 {
                     "include": "#declaration-contract"
-                },
-                {
-                    "include": "#declaration-interface"
                 },
                 {
                     "include": "#declaration-library"
@@ -360,12 +357,15 @@
         "declaration-contract": {
             "patterns": [
                 {
-                    "match": "\\b(contract)(\\s+([A-Za-z_]\\w*))?\\b",
+                    "match": "\\b(contract)(\\s+interface)?(\\s+([A-Z]\\w*))?\\b",
                     "captures": {
                         "1": {
-                            "name": "storage.type.contract.sophia"
+                            "name": "keyword.control.keywords.sophia"
                         },
-                        "3": {
+                        "2": {
+                            "name": "keyword.control.keywords.sophia"
+                        },
+                        "4": {
                             "name": "entity.name.type.contract.sophia"
                         }
                     }
@@ -375,17 +375,6 @@
                     "name": "storage.modifier.is.sophia"
                 }
             ]
-        },
-        "declaration-interface": {
-            "match": "\\b(interface)(\\s+([A-Za-z_]\\w*))?\\b",
-            "captures": {
-                "1": {
-                    "name": "storage.type.interface.sophia"
-                },
-                "3": {
-                    "name": "entity.name.type.interface.sophia"
-                }
-            }
         },
         "declaration-library": {
             "match": "\\b(library)(\\s+([A-Za-z_]\\w*))?\\b",
