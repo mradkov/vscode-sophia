@@ -39,6 +39,9 @@
         },
         {
             "include": "#punctuation"
+        },
+        {
+            "include": "#alias"
         }
     ],
     "repository": {
@@ -483,6 +486,30 @@
                 {
                     "match": ",",
                     "name": "punctuation.separator.sophia"
+                }
+            ]
+        },
+        "alias": {
+            "patterns": [
+                {
+                    "match": "(using)\\s+([A-Za-z_']*)(\\s+(as)\\s+([A-Za-z_']*))?(\\s+(for|hiding))?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.keywords.sophia"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.sophia"
+                        },
+                        "4": {
+                            "name": "keyword.control.keywords.sophia"
+                        },
+                        "5": {
+                            "name": "entity.name.namespace.sophia"
+                        },
+                        "7": {
+                            "name": "keyword.control.keywords.sophia"
+                        }
+                    }
                 }
             ]
         }
