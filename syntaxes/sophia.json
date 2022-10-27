@@ -313,7 +313,7 @@
                     "name": "keyword.control.exceptions.sophia"
                 },
                 {
-                    "match": "\\b(and|elif|else|false|function|if|import|include|internal|let|mod|namespace|private|public|rec|payable|stateful|entrypoint|switch|true|type|record|datatype|main)\\b",
+                    "match": "\\b(and|elif|else|false|function|if|import|include|internal|let|mod|private|public|rec|payable|stateful|entrypoint|switch|true|type|record|datatype|main)\\b",
                     "name": "keyword.control.keywords.sophia"
                 },
                 {
@@ -388,10 +388,10 @@
             }
         },
         "declaration-namespace": {
-            "match": "\\b(namespace)(\\s+([A-Za-z_]\\w*))?\\b",
+            "match": "\\b(namespace)(\\s+([A-Z]\\w*))?\\b",
             "captures": {
                 "1": {
-                    "name": "storage.type.namespace.sophia"
+                    "name": "keyword.control.keywords.sophia"
                 },
                 "3": {
                     "name": "entity.name.type.namespace.sophia"
