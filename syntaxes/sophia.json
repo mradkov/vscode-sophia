@@ -148,18 +148,118 @@
             ]
         },
         "comment-line": {
-            "match": "(?<!tp:)//.*$",
-            "name": "comment.line.double-slash.sophia"
+            "match": "(?<!tp:)(//).*$",
+            "name": "comment.line.double-slash.sophia",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.comment.sophia"
+                }
+            }
         },
         "comment-block": {
             "begin": "/\\*",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.begin.sophia"
+                }
+            },
             "end": "\\*/",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.end.sophia"
+                }
+            },
             "name": "comment.block.sophia",
             "patterns": [
                 {
                     "include": "#comment-block"
                 }
             ]
+        },
+        "operator": {
+            "patterns": [
+                {
+                    "include": "#operator-word"
+                },
+                {
+                    "include": "#operator-arrow"
+                },
+                {
+                    "include": "#operator-list"
+                },
+                {
+                    "include": "#operator-logic"
+                },
+                {
+                    "include": "#operator-binary"
+                },
+                {
+                    "include": "#operator-arithmetic"
+                },
+                {
+                    "include": "#operator-assignment"
+                }
+            ]
+        },
+        "operator-word": {
+            "match": "\\b(mod|band|bor|bxor|bnot)\\b",
+            "name": "keyword.operator.word.sophia"
+        },
+        "operator-arrow": {
+            "match": "(\\|>|=>|->|<-|\\.\\.)",
+            "name": "keyword.operator.arrow.associative.sophia"
+        },
+        "operator-list": {
+            "match": "(::|\\+\\+)",
+            "name": "keyword.operator.list.sophia"
+        },
+        "operator-logic": {
+            "match": "(==|!=|=<|>=|<|>|&&|\\|\\||!)",
+            "name": "keyword.operator.logic.sophia"
+        },
+        "operator-binary": {
+            "match": "(<<|>>)",
+            "name": "keyword.operator.binary.sophia"
+        },
+        "operator-arithmetic": {
+            "match": "(\\+|\\-|\\/|\\*|\\^)",
+            "name": "keyword.operator.arithmetic.sophia"
+        },
+        "operator-assignment": {
+            "match": "(=|@|:|\\|)",
+            "name": "keyword.operator.assignment.sophia"
+        },
+        "control": {
+            "patterns": [
+                {
+                    "include": "#control-flow"
+                },
+                {
+                    "include": "#control-keywords"
+                },
+                {
+                    "include": "#control-modifiers"
+                },
+                {
+                    "include": "#control-underscore"
+                }
+            ]
+        },
+        "control-flow": {
+            "match": "\\b(if|elif|else|switch|let)\\b",
+            "name": "keyword.control.flow.sophia"
+        },
+        "control-keywords": {
+            "match": "\\b(contract|interface|namespace|record|datatype|type|entrypoint|function|main|using|as|for|hiding|include)\\b",
+            "name": "keyword.control.keywords.sophia"
+        },
+        "control-modifiers": {
+            "match": "\\b(stateful|payable|private|public|indexed)\\b",
+            "name": "storage.modifier.sophia"
+        },
+        "control-underscore": {
+            "match": "\\b(_)\\b",
+            "name": "constant.other.underscore.sophia"
         },
         "pragma": {
             "match": "(@compiler)(?:\\s*(==|=<|>=|<|>))?(?:\\s*(\\d+(?:\\.\\d+)*))?",
@@ -179,29 +279,44 @@
             "match": "\\b(include)\\b",
             "name": "keyword.control.import.sophia"
         },
-        "alias": {
+        "literal": {
             "patterns": [
                 {
-                    "match": "\\b(using)\\s+([A-Z][A-Za-z0-9_']*)(?:\\s+(as)\\s+([A-Z][A-Za-z0-9_']*))?(?:\\s+(for|hiding))?\\b",
-                    "captures": {
-                        "1": {
-                            "name": "keyword.control.import.sophia"
-                        },
-                        "2": {
-                            "name": "entity.name.namespace.sophia"
-                        },
-                        "3": {
-                            "name": "keyword.control.import.sophia"
-                        },
-                        "4": {
-                            "name": "entity.name.namespace.sophia"
-                        },
-                        "5": {
-                            "name": "keyword.control.import.sophia"
-                        }
-                    }
+                    "include": "#bytes-literal"
+                },
+                {
+                    "include": "#number-hex"
+                },
+                {
+                    "include": "#number-decimal"
+                },
+                {
+                    "include": "#chain-literal"
+                },
+                {
+                    "include": "#constant-boolean"
                 }
             ]
+        },
+        "bytes-literal": {
+            "match": "#[0-9a-fA-F]+(?:_[0-9a-fA-F]+)*\\b",
+            "name": "constant.numeric.bytes.sophia"
+        },
+        "number-decimal": {
+            "match": "\\b[0-9]+(?:_[0-9]+)*\\b",
+            "name": "constant.numeric.decimal.sophia"
+        },
+        "number-hex": {
+            "match": "\\b0[xX][0-9a-fA-F]+(?:_[0-9a-fA-F]+)*\\b",
+            "name": "constant.numeric.hexadecimal.sophia"
+        },
+        "chain-literal": {
+            "match": "\\b(?:ak|ct|ok|oq|sg|nm|ch|cb|th)_[1-9A-HJ-NP-Za-km-z]+\\b",
+            "name": "constant.other.address.sophia"
+        },
+        "constant-boolean": {
+            "match": "\\b(true|false)\\b",
+            "name": "constant.language.boolean.sophia"
         },
         "string": {
             "begin": "\"",
@@ -221,6 +336,56 @@
         "type-variable": {
             "match": "'[a-z_][A-Za-z0-9_']*(?!')",
             "name": "storage.type.generic.sophia"
+        },
+        "type": {
+            "patterns": [
+                {
+                    "include": "#type-qualified"
+                },
+                {
+                    "include": "#type-primitive"
+                }
+            ]
+        },
+        "type-qualified": {
+            "match": "\\b(Chain\\.ttl|AENS\\.pointee|AENS\\.name|AENSv2\\.pointee|AENSv2\\.name|MCL_BLS12_381\\.fr|MCL_BLS12_381\\.fp)\\b",
+            "name": "support.type.builtin.sophia"
+        },
+        "type-primitive": {
+            "match": "\\b(int|address|bool|bits|bytes|string|list|option|char|unit|map|event|hash|signature|oracle|oracle_query)\\b",
+            "name": "support.type.primitive.sophia"
+        },
+        "global": {
+            "patterns": [
+                {
+                    "include": "#global-exceptions"
+                },
+                {
+                    "include": "#global-builtins"
+                },
+                {
+                    "include": "#global-constructors"
+                },
+                {
+                    "include": "#global-namespaces"
+                }
+            ]
+        },
+        "global-exceptions": {
+            "match": "\\b(require|abort|exit)\\b",
+            "name": "keyword.control.exceptions.sophia"
+        },
+        "global-builtins": {
+            "match": "\\b(put|state)\\b",
+            "name": "support.function.builtin.sophia"
+        },
+        "global-constructors": {
+            "match": "\\b(Some|None|RelativeTTL|FixedTTL)\\b",
+            "name": "constant.language.constructor.sophia"
+        },
+        "global-namespaces": {
+            "match": "\\b(Chain|Address|Bits|Bytes|Call|Char|Contract|Crypto|Int|List|Map|Option|Oracle|String|AENS|AENSv2|Auth|BLS12_381|MCL_BLS12_381|Frac|Func|Pair|Triple|Set|Bitwise)\\b",
+            "name": "variable.language.namespace.sophia"
         },
         "declaration": {
             "patterns": [
@@ -297,180 +462,6 @@
                 }
             }
         },
-        "literal": {
-            "patterns": [
-                {
-                    "include": "#bytes-literal"
-                },
-                {
-                    "include": "#number-hex"
-                },
-                {
-                    "include": "#number-decimal"
-                },
-                {
-                    "include": "#chain-literal"
-                },
-                {
-                    "include": "#constant-boolean"
-                }
-            ]
-        },
-        "bytes-literal": {
-            "match": "#[0-9a-fA-F]+(?:_[0-9a-fA-F]+)*\\b",
-            "name": "constant.numeric.bytes.sophia"
-        },
-        "number-hex": {
-            "match": "\\b0[xX][0-9a-fA-F]+(?:_[0-9a-fA-F]+)*\\b",
-            "name": "constant.numeric.hexadecimal.sophia"
-        },
-        "number-decimal": {
-            "match": "\\b[0-9]+(?:_[0-9]+)*\\b",
-            "name": "constant.numeric.decimal.sophia"
-        },
-        "chain-literal": {
-            "match": "\\b(?:ak|ct|ok|oq|sg|nm|ch|cb|th)_[1-9A-HJ-NP-Za-km-z]+\\b",
-            "name": "constant.other.address.sophia"
-        },
-        "constant-boolean": {
-            "match": "\\b(true|false)\\b",
-            "name": "constant.language.boolean.sophia"
-        },
-        "type": {
-            "patterns": [
-                {
-                    "include": "#type-qualified"
-                },
-                {
-                    "include": "#type-primitive"
-                }
-            ]
-        },
-        "type-qualified": {
-            "match": "\\b(Chain\\.ttl|AENS\\.pointee|AENS\\.name|AENSv2\\.pointee|AENSv2\\.name|MCL_BLS12_381\\.fr|MCL_BLS12_381\\.fp)\\b",
-            "name": "support.type.builtin.sophia"
-        },
-        "type-primitive": {
-            "match": "\\b(int|address|bool|bits|bytes|string|list|option|char|unit|map|event|hash|signature|oracle|oracle_query)\\b",
-            "name": "support.type.primitive.sophia"
-        },
-        "global": {
-            "patterns": [
-                {
-                    "include": "#global-exceptions"
-                },
-                {
-                    "include": "#global-builtins"
-                },
-                {
-                    "include": "#global-constructors"
-                },
-                {
-                    "include": "#global-namespaces"
-                }
-            ]
-        },
-        "global-exceptions": {
-            "match": "\\b(require|abort|exit)\\b",
-            "name": "keyword.control.exceptions.sophia"
-        },
-        "global-builtins": {
-            "match": "\\b(put|state)\\b",
-            "name": "support.function.builtin.sophia"
-        },
-        "global-constructors": {
-            "match": "\\b(Some|None|RelativeTTL|FixedTTL)\\b",
-            "name": "constant.language.constructor.sophia"
-        },
-        "global-namespaces": {
-            "match": "\\b(Chain|Address|Bits|Bytes|Call|Char|Contract|Crypto|Int|List|Map|Option|Oracle|String|AENS|AENSv2|Auth|BLS12_381|MCL_BLS12_381|Frac|Func|Pair|Triple|Set|Bitwise)\\b",
-            "name": "variable.language.namespace.sophia"
-        },
-        "control": {
-            "patterns": [
-                {
-                    "include": "#control-flow"
-                },
-                {
-                    "include": "#control-keywords"
-                },
-                {
-                    "include": "#control-modifiers"
-                },
-                {
-                    "include": "#control-underscore"
-                }
-            ]
-        },
-        "control-flow": {
-            "match": "\\b(if|elif|else|switch|let)\\b",
-            "name": "keyword.control.flow.sophia"
-        },
-        "control-keywords": {
-            "match": "\\b(contract|interface|namespace|record|datatype|type|entrypoint|function|main|using|as|for|hiding|include)\\b",
-            "name": "keyword.control.keywords.sophia"
-        },
-        "control-modifiers": {
-            "match": "\\b(stateful|payable|private|public|indexed)\\b",
-            "name": "storage.modifier.sophia"
-        },
-        "control-underscore": {
-            "match": "\\b(_)\\b",
-            "name": "constant.other.underscore.sophia"
-        },
-        "operator": {
-            "patterns": [
-                {
-                    "include": "#operator-word"
-                },
-                {
-                    "include": "#operator-arrow"
-                },
-                {
-                    "include": "#operator-list"
-                },
-                {
-                    "include": "#operator-logic"
-                },
-                {
-                    "include": "#operator-binary"
-                },
-                {
-                    "include": "#operator-arithmetic"
-                },
-                {
-                    "include": "#operator-assignment"
-                }
-            ]
-        },
-        "operator-word": {
-            "match": "\\b(mod|band|bor|bxor|bnot)\\b",
-            "name": "keyword.operator.word.sophia"
-        },
-        "operator-arrow": {
-            "match": "(\\|>|=>|->|<-|\\.\\.)",
-            "name": "keyword.operator.arrow.associative.sophia"
-        },
-        "operator-list": {
-            "match": "(::|\\+\\+)",
-            "name": "keyword.operator.list.sophia"
-        },
-        "operator-logic": {
-            "match": "(==|!=|=<|>=|<|>|&&|\\|\\||!)",
-            "name": "keyword.operator.logic.sophia"
-        },
-        "operator-binary": {
-            "match": "(<<|>>)",
-            "name": "keyword.operator.binary.sophia"
-        },
-        "operator-arithmetic": {
-            "match": "(\\+|\\-|\\/|\\*|\\^)",
-            "name": "keyword.operator.arithmetic.sophia"
-        },
-        "operator-assignment": {
-            "match": "(=|@|:|\\|)",
-            "name": "keyword.operator.assignment.sophia"
-        },
         "function-call": {
             "match": "\\b([a-z_][A-Za-z0-9_']*)\\s*(?=\\()",
             "captures": {
@@ -500,6 +491,30 @@
                 {
                     "match": "[(){}\\[\\]]",
                     "name": "punctuation.brackets.sophia"
+                }
+            ]
+        },
+        "alias": {
+            "patterns": [
+                {
+                    "match": "\\b(using)\\s+([A-Z][A-Za-z0-9_']*)(?:\\s+(as)\\s+([A-Z][A-Za-z0-9_']*))?(?:\\s+(for|hiding))?\\b",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.import.sophia"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.sophia"
+                        },
+                        "3": {
+                            "name": "keyword.control.import.sophia"
+                        },
+                        "4": {
+                            "name": "entity.name.namespace.sophia"
+                        },
+                        "5": {
+                            "name": "keyword.control.import.sophia"
+                        }
+                    }
                 }
             ]
         }
